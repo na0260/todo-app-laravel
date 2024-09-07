@@ -86,6 +86,14 @@ class TodoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $todos = session()->get('todos', []);
+
+        $todos = array_filter($todos, function ($todo) use ($id) {
+            return $todo['id'] != $id;
+        });
+
+        session()->put('todos', array_values($todos));
+
+        return redirect()->route('todos.index')->with('success', 'Todo deleted successfully.');
     }
 }
