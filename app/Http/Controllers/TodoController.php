@@ -29,7 +29,21 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255',
+        ]);
+
+        $todos = session()->get('todos', []);
+
+        $newTodo = [
+            'id' => count($todos) + 1,
+            'title' => $request->title,
+        ];
+
+        $todos[] = $newTodo;
+        session()->put('todos', $todos);
+
+        return redirect()->route('todos.index')->with('success', 'Todo added successfully.');
     }
 
     /**
