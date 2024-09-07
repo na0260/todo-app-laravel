@@ -11,9 +11,10 @@ class TodoList extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $todos;
+    public function __construct($todos)
     {
-        //
+        $this->todos = $todos;
     }
 
     /**

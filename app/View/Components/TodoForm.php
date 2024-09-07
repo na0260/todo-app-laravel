@@ -6,14 +6,17 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class todo-form extends Component
+class TodoForm extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $todo;
+    public $action;
+    public function __construct($todo = null, $action = 'create')
     {
-        //
+        $this->todo = $todo;
+        $this->action = $action;
     }
 
     /**
