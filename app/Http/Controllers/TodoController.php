@@ -67,7 +67,18 @@ class TodoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $todos = session()->get('todos', []);
+
+        foreach ($todos as  &$todo) {
+            if ($todo['id'] == $id) {
+                $todo['title'] = $request->input('title', $todo['title']);
+                break;
+            }
+        }
+
+        session()->put('todos', $todos);
+
+        return redirect()->route('todos.index')->with('success', 'Todo updated successfully.');
     }
 
     /**
