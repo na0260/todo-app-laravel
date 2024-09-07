@@ -11,7 +11,9 @@ class TodoController extends Controller
      */
     public function index()
     {
-        //
+        $todos = session()->get('todos', []);
+        return view('dashboard', ['todos' => $todos]);
+
     }
 
     /**
